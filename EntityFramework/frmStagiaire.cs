@@ -10,16 +10,19 @@ using System.Windows.Forms;
 
 namespace EntityFramework
 {
-    public partial class Form1 : Form
+    public partial class frmStagiaire : Form
     {
-        public Form1()
+        public frmStagiaire()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+
 
         }
+
     }
 }
