@@ -16,7 +16,7 @@ namespace EntityFramework
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmStagiaire());
+            Application.Run(new frmCommande());
         }
     }
 }
