@@ -78,6 +78,8 @@ namespace EntityFramework
                 (commande c) => c.id == id
             );
 
+
+
             var req = from x in clsDb.db.commandes
                       where x.id == id
                       join cl in clsDb.db.clients on x.client equals cl
