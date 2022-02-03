@@ -45,6 +45,11 @@
             this.btnModifier = new System.Windows.Forms.Button();
             this.btnChercher = new System.Windows.Forms.Button();
             this.btnAfficher = new System.Windows.Forms.Button();
+            this.txtMin = new System.Windows.Forms.TextBox();
+            this.txtMax = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnrechercher = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,9 +147,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(390, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(390, 149);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(491, 242);
+            this.dataGridView1.Size = new System.Drawing.Size(491, 177);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -166,6 +171,7 @@
             this.btnSupp.TabIndex = 13;
             this.btnSupp.Text = "Supprimer";
             this.btnSupp.UseVisualStyleBackColor = true;
+            this.btnSupp.Click += new System.EventHandler(this.btnSupp_Click);
             // 
             // btnModifier
             // 
@@ -197,11 +203,58 @@
             this.btnAfficher.UseVisualStyleBackColor = true;
             this.btnAfficher.Click += new System.EventHandler(this.btnAfficher_Click);
             // 
+            // txtMin
+            // 
+            this.txtMin.Location = new System.Drawing.Point(468, 74);
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(80, 20);
+            this.txtMin.TabIndex = 17;
+            // 
+            // txtMax
+            // 
+            this.txtMax.Location = new System.Drawing.Point(627, 74);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(80, 20);
+            this.txtMax.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(387, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "montant min";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(554, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "montant max";
+            // 
+            // btnrechercher
+            // 
+            this.btnrechercher.Location = new System.Drawing.Point(740, 72);
+            this.btnrechercher.Name = "btnrechercher";
+            this.btnrechercher.Size = new System.Drawing.Size(75, 23);
+            this.btnrechercher.TabIndex = 21;
+            this.btnrechercher.Text = "Rechercher";
+            this.btnrechercher.UseVisualStyleBackColor = true;
+            this.btnrechercher.Click += new System.EventHandler(this.btnrechercher_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 450);
+            this.ClientSize = new System.Drawing.Size(893, 503);
+            this.Controls.Add(this.btnrechercher);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtMax);
+            this.Controls.Add(this.txtMin);
             this.Controls.Add(this.btnAfficher);
             this.Controls.Add(this.btnChercher);
             this.Controls.Add(this.btnModifier);
@@ -247,6 +300,11 @@
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnChercher;
         private System.Windows.Forms.Button btnAfficher;
+        private System.Windows.Forms.TextBox txtMin;
+        private System.Windows.Forms.TextBox txtMax;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnrechercher;
     }
 }
 

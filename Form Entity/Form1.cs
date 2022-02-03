@@ -18,12 +18,16 @@ namespace Form_Entity
         }
         entityEntities db;
         commande selectedCommande;
+        public void loadDgv()
+        {
+            dataGridView1.DataSource = db.commandes.ToList();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new entityEntities();
 
-            dataGridView1.DataSource = db.commandes.ToList();
 
+            loadDgv();
             cmbClient.DataSource = db.clients.ToList();
             cmbClient.DisplayMember = "nom";
             cmbClient.ValueMember = "id";
@@ -52,16 +56,21 @@ namespace Form_Entity
             if ( resultat == DialogResult.Yes )                                                                         
             {
                 db.SaveChanges();
+                loadDgv();
+
             }
             else if (resultat == DialogResult.No)
             {
                 MessageBox.Show("Vous avez annuler la commande");
+                loadDgv();
+
             }
         }
 
         private void btnAfficher_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = db.commandes.ToList();
+            loadDgv();
+
 
         }
 
@@ -84,6 +93,7 @@ namespace Form_Entity
             commande c = db.commandes.Find(int.Parse(txtId.Text));
 
 
+
             afficher(c);
         }
         public void afficher(commande c)
@@ -98,15 +108,54 @@ namespace Form_Entity
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            selectedCommande.montant = double.Parse(txtMontant.Text);
-            selectedCommande.DateCmd = dateTimePicker1.Value;
-            selectedCommande.idClient = int.Parse(cmbClient.SelectedValue.ToString());
+            try
+            {
+                selectedCommande.montant = double.Parse(txtMontant.Text);
+                selectedCommande.DateCmd = dateTimePicker1.Value;
+                selectedCommande.idClient = int.Parse(cmbClient.SelectedValue.ToString());
 
-            db.SaveChanges();
+                db.SaveChanges();
+
+                selectedCommande = null;
+                loadDgv();
+
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Selectionnez une commande pour la modifier.");
+                loadDgv();
+
+            }
 
 
         }
 
-        
+        private void btnSupp_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                commande c = db.commandes.Find(int.Parse(txtId.Text));
+                db.commandes.Remove(c);
+                //db.commandes.Remove(selectedCommande);
+                db.SaveChanges();
+                loadDgv();
+
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Selectionnez une commande pour la supprimer.");
+                loadDgv();
+
+            }
+        }
+
+        private void btnrechercher_Click(object sender, EventArgs e)
+        {
+            double min = double.Parse(txtMin.Text);
+            double max = double.Parse(txtMax.Text);
+            var req = db.commandes.Where( (commande c) => c.montant > min && c.montant < max );
+            dataGridView1.DataSource = req.ToList();
+        }
     }
 }
