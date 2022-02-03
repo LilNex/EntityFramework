@@ -17,6 +17,7 @@ namespace Form_Entity
             InitializeComponent();
         }
         entityEntities db;
+        commande selectedCommande;
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new entityEntities();
@@ -44,15 +45,15 @@ namespace Form_Entity
 
             db.commandes.Add(c);
 
+            DialogResult resultat = MessageBox.Show("Confirmer la commande ?", "Confirmation", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
 
-
-
+            //MessageBox.Show()
             //MessageBox.Show("Commande ajoutée");
-            if (MessageBox.Show("Confirmer la commande ?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if ( resultat == DialogResult.Yes )                                                                         
             {
                 db.SaveChanges();
             }
-            else
+            else if (resultat == DialogResult.No)
             {
                 MessageBox.Show("Vous avez annuler la commande");
             }
@@ -61,6 +62,37 @@ namespace Form_Entity
         private void btnAfficher_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = db.commandes.ToList();
+
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //int i = e.RowIndex;
+            //DataGridViewRow x = dataGridView1.Rows[i];
+            //MessageBox.Show(x.Cells[1].Value.ToString());
+
+            int i = dataGridView1.CurrentRow.Index;
+            commande c = (commande)dataGridView1.Rows[i].DataBoundItem;
+            txtId.Text = c.id.ToString();
+            txtMontant.Text = c.montant.ToString();
+            dateTimePicker1.Value = Convert.ToDateTime(c.DateCmd);
+            cmbClient.SelectedItem = c.client;
+
+            selectedCommande = c;
+
+            
+
+
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            selectedCommande.montant = double.Parse(txtMontant.Text);
+            selectedCommande.DateCmd = dateTimePicker1.Value;
+            selectedCommande.idClient = int.Parse(cmbClient.SelectedValue.ToString());
+
+            db.SaveChanges();
+
 
         }
     }
