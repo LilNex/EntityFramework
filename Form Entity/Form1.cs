@@ -73,16 +73,27 @@ namespace Form_Entity
 
             int i = dataGridView1.CurrentRow.Index;
             commande c = (commande)dataGridView1.Rows[i].DataBoundItem;
+
+            afficher(c);
+            
+
+
+        }
+        private void btnChercher_Click(object sender, EventArgs e)
+        {
+            commande c = db.commandes.Find(int.Parse(txtId.Text));
+
+
+            afficher(c);
+        }
+        public void afficher(commande c)
+        {
             txtId.Text = c.id.ToString();
             txtMontant.Text = c.montant.ToString();
             dateTimePicker1.Value = Convert.ToDateTime(c.DateCmd);
             cmbClient.SelectedItem = c.client;
 
             selectedCommande = c;
-
-            
-
-
         }
 
         private void btnModifier_Click(object sender, EventArgs e)
@@ -95,5 +106,7 @@ namespace Form_Entity
 
 
         }
+
+        
     }
 }

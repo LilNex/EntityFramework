@@ -185,6 +185,7 @@
             this.btnChercher.TabIndex = 15;
             this.btnChercher.Text = "Chercher";
             this.btnChercher.UseVisualStyleBackColor = true;
+            this.btnChercher.Click += new System.EventHandler(this.btnChercher_Click);
             // 
             // btnAfficher
             // 
