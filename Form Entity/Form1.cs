@@ -20,15 +20,27 @@ namespace Form_Entity
         private void Form1_Load(object sender, EventArgs e)
         {
             db = new entityEntities();
+
+            dataGridView1.DataSource = db.commandes.ToList();
+
+            cmbClient.DataSource = db.clients.ToList();
+            cmbClient.DisplayMember = "nom";
+            cmbClient.ValueMember = "id";
+
+            comboBox2.DataSource = db.clients.ToList();
+            comboBox2.DisplayMember = "nom";
+            comboBox2.ValueMember = "id";
+
             //db.commandes.
         }
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             commande c = new commande();
+            //c.id = int.Parse(txtId.Text);
             c.DateCmd = dateTimePicker1.Value;
             c.montant = double.Parse(txtMontant.Text);
-            c.idClient = 1;
+            c.idClient = int.Parse(cmbClient.SelectedValue.ToString());
 
             db.commandes.Add(c);
 
@@ -36,7 +48,7 @@ namespace Form_Entity
 
 
             //MessageBox.Show("Commande ajoutée");
-            if (MessageBox.Show("Confirmer la commande ?,", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Confirmer la commande ?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 db.SaveChanges();
             }
@@ -44,6 +56,12 @@ namespace Form_Entity
             {
                 MessageBox.Show("Vous avez annuler la commande");
             }
+        }
+
+        private void btnAfficher_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = db.commandes.ToList();
+
         }
     }
 }
