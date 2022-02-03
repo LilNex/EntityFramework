@@ -154,8 +154,11 @@ namespace Form_Entity
         {
             double min = double.Parse(txtMin.Text);
             double max = double.Parse(txtMax.Text);
-            var req = db.commandes.Where( (commande c) => c.montant > min && c.montant < max );
+            var req = db.commandes.Where((commande c) => c.montant > min || c.montant < max);
+            //var req2 = db.commandes.Join()
             dataGridView1.DataSource = req.ToList();
+
+
         }
     }
 }
